@@ -1,0 +1,17 @@
+<Solution>
+    <Folder Name="/Solution Items/">
+        <File Path=".editorconfig" />
+        <File Path="Directory.Build.props" />
+        <File Path="Directory.Packages.props" />
+    </Folder>
+    <Folder Name="/SystemTools/">
+        <Project Path="../SystemTools/SystemTools.ApiContracts/SystemTools.ApiContracts.csproj" />
+        <Project Path="../SystemTools/SystemTools.ReCounterContracts/SystemTools.ReCounterContracts.csproj" />
+        <Project Path="../SystemTools/SystemTools.SystemToolsShared/SystemTools.SystemToolsShared.csproj" />
+    </Folder>
+    <Folder Name="/Tests/">
+        <Project Path="BackendCarcassShared.Contracts.Tests/BackendCarcassShared.Contracts.Tests.csproj" />
+    </Folder>
+    <Project Path="BackendCarcassShared.Contracts/BackendCarcassShared.Contracts.csproj" />
+    <Project Path="BackendCarcassShared/BackendCarcassShared.csproj" Id="e4d69854-4ab8-4220-a508-66cb9fb0d15d" />
+</Solution>
