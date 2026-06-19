@@ -13,5 +13,4 @@
         <Project Path="BackendCarcassShared.Contracts.Tests/BackendCarcassShared.Contracts.Tests.csproj" />
     </Folder>
     <Project Path="BackendCarcassShared.Contracts/BackendCarcassShared.Contracts.csproj" />
-    <Project Path="BackendCarcassShared/BackendCarcassShared.csproj" Id="e4d69854-4ab8-4220-a508-66cb9fb0d15d" />
 </Solution>
