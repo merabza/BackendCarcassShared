@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 using BackendCarcassShared.Contracts.V1.Requests;
 using BackendCarcassShared.Contracts.V1.Responses;
 using BackendCarcassShared.Contracts.V1.Routes;
+using LanguageExt;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Moq.Protected;
 using Newtonsoft.Json;
+using OneOf;
 using SystemTools.SystemToolsShared.Errors;
 using Xunit;
 
@@ -72,7 +74,7 @@ public sealed class JwtContractReCounterApiClientTests : IDisposable
             .ReturnsAsync(response);
 
         // Act
-        var result = await client.IsCurrentUserValid(TestToken);
+        Option<Error[]> result = await client.IsCurrentUserValid(TestToken);
 
         // Assert
         Assert.True(result.IsNone);
@@ -100,11 +102,11 @@ public sealed class JwtContractReCounterApiClientTests : IDisposable
             .ReturnsAsync(response);
 
         // Act
-        var result = await client.IsCurrentUserValid(TestToken);
+        Option<Error[]> result = await client.IsCurrentUserValid(TestToken);
 
         // Assert
         Assert.True(result.IsSome);
-        var errorList = result.Match(errs => errs, () => Array.Empty<Error>());
+        Error[] errorList = result.Match(errs => errs, () => Array.Empty<Error>());
         Assert.NotEmpty(errorList);
     }
 
@@ -152,7 +154,7 @@ public sealed class JwtContractReCounterApiClientTests : IDisposable
             ItExpr.IsAny<CancellationToken>()).ReturnsAsync(response);
 
         // Act
-        var result = await client.Login(loginRequest);
+        OneOf<LoginResponse, Error[]> result = await client.Login(loginRequest);
 
         // Assert
         Assert.True(result.IsT0);
@@ -189,7 +191,7 @@ public sealed class JwtContractReCounterApiClientTests : IDisposable
             ItExpr.IsAny<CancellationToken>()).ReturnsAsync(response);
 
         // Act
-        var result = await client.Login(loginRequest);
+        OneOf<LoginResponse, Error[]> result = await client.Login(loginRequest);
 
         // Assert
         Assert.True(result.IsT1);
