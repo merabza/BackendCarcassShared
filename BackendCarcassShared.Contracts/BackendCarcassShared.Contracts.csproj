@@ -4,6 +4,7 @@
       <PackageReference Include="Microsoft.Extensions.Http" />
       <PackageReference Include="SystemTools.ApiContracts" />
       <PackageReference Include="SystemTools.ReCounterContracts" />
+      <PackageReference Include="SystemTools.SystemToolsShared" />
     </ItemGroup>
 
 </Project>
