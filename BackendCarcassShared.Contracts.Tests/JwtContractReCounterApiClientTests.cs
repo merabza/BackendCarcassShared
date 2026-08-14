@@ -303,9 +303,9 @@ public sealed class JwtContractReCounterApiClientTests : IDisposable
 
         // Assert
         Assert.NotNull(capturedContent);
-        var deserializedRequest = JsonConvert.DeserializeObject<LoginRequest>(capturedContent!);
+        var deserializedRequest = JsonConvert.DeserializeObject<LoginRequest>(capturedContent);
         Assert.NotNull(deserializedRequest);
-        Assert.Equal(loginRequest.UserName, deserializedRequest!.UserName);
+        Assert.Equal(loginRequest.UserName, deserializedRequest.UserName);
         Assert.Equal(loginRequest.Password, deserializedRequest.Password);
     }
 
