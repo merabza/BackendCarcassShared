@@ -74,7 +74,7 @@ public sealed class JwtContractReCounterApiClientTests : IDisposable
             .ReturnsAsync(response);
 
         // Act
-        Option<Error[]> result = await client.IsCurrentUserValid(TestToken);
+        Option<ErrorOmd[]> result = await client.IsCurrentUserValid(TestToken);
 
         // Assert
         Assert.True(result.IsNone);
@@ -87,7 +87,7 @@ public sealed class JwtContractReCounterApiClientTests : IDisposable
         var client = new TestableJwtContractReCounterApiClient(
             _mockLogger.Object, _mockHttpClientFactory.Object, TestServer, false);
 
-        var errors = new[] { new Error { Code = "NotFound", Name = "Invalid token" } };
+        var errors = new[] { new ErrorOmd { Code = "NotFound", Name = "Invalid token" } };
         string errorJson = JsonConvert.SerializeObject(errors);
 
         using var response = new HttpResponseMessage
@@ -102,11 +102,11 @@ public sealed class JwtContractReCounterApiClientTests : IDisposable
             .ReturnsAsync(response);
 
         // Act
-        Option<Error[]> result = await client.IsCurrentUserValid(TestToken);
+        Option<ErrorOmd[]> result = await client.IsCurrentUserValid(TestToken);
 
         // Assert
         Assert.True(result.IsSome);
-        Error[] errorList = result.Match(errs => errs, () => Array.Empty<Error>());
+        ErrorOmd[] errorList = result.Match(errs => errs, () => Array.Empty<ErrorOmd>());
         Assert.NotEmpty(errorList);
     }
 
@@ -154,7 +154,7 @@ public sealed class JwtContractReCounterApiClientTests : IDisposable
             ItExpr.IsAny<CancellationToken>()).ReturnsAsync(response);
 
         // Act
-        OneOf<LoginResponse, Error[]> result = await client.Login(loginRequest);
+        OneOf<LoginResponse, ErrorOmd[]> result = await client.Login(loginRequest);
 
         // Assert
         Assert.True(result.IsT0);
@@ -176,7 +176,7 @@ public sealed class JwtContractReCounterApiClientTests : IDisposable
 
         var loginRequest = new LoginRequest { UserName = "invaliduser", Password = "wrongpassword" };
 
-        var errors = new[] { new Error { Code = "Unauthorized", Name = "Invalid credentials" } };
+        var errors = new[] { new ErrorOmd { Code = "Unauthorized", Name = "Invalid credentials" } };
         string errorJson = JsonConvert.SerializeObject(errors);
 
         using var response = new HttpResponseMessage
@@ -191,7 +191,7 @@ public sealed class JwtContractReCounterApiClientTests : IDisposable
             ItExpr.IsAny<CancellationToken>()).ReturnsAsync(response);
 
         // Act
-        OneOf<LoginResponse, Error[]> result = await client.Login(loginRequest);
+        OneOf<LoginResponse, ErrorOmd[]> result = await client.Login(loginRequest);
 
         // Assert
         Assert.True(result.IsT1);
