@@ -24,14 +24,14 @@ public /*open*/ class JwtContractReCounterApiClient : ReCounterApiClient
     {
     }
 
-    public Task<Option<Error[]>> IsCurrentUserValid(string token, CancellationToken cancellationToken = default)
+    public Task<Option<ErrorOmd[]>> IsCurrentUserValid(string token, CancellationToken cancellationToken = default)
     {
         return GetWithTokenAsync(token,
             CarcassApiRoutes.UserRights.UserRightsBase + CarcassApiRoutes.UserRights.IsCurrentUserValid,
             cancellationToken);
     }
 
-    public Task<OneOf<LoginResponse, Error[]>> Login(LoginRequest loginRequest,
+    public Task<OneOf<LoginResponse, ErrorOmd[]>> Login(LoginRequest loginRequest,
         CancellationToken cancellationToken = default)
     {
         return PostAsyncReturn<LoginResponse>(

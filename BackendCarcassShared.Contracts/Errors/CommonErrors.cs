@@ -4,10 +4,11 @@ namespace BackendCarcassShared.Contracts.Errors;
 
 public static class CommonErrors
 {
-    public static readonly Error IncorrectData = new() { Code = nameof(IncorrectData), Name = "არასწორი მონაცემები" };
+    public static readonly ErrorOmd
+        IncorrectData = new() { Code = nameof(IncorrectData), Name = "არასწორი მონაცემები" };
 
-    public static Error CannotFindMethod(string methodName)
+    public static ErrorOmd CannotFindMethod(string methodName)
     {
-        return new Error { Code = nameof(CannotFindMethod), Name = $"cannot find method {methodName}" };
+        return new ErrorOmd { Code = nameof(CannotFindMethod), Name = $"cannot find method {methodName}" };
     }
 }

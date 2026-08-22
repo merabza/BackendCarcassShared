@@ -4,48 +4,50 @@ namespace BackendCarcassShared.Contracts.Errors;
 
 public static class CarcassMasterDataErrors
 {
-    public static Error MustBeInteger(string fieldName, string? caption, string? defErrorCode, string? defErrorMessage)
+    public static ErrorOmd MustBeInteger(string fieldName, string? caption, string? defErrorCode,
+        string? defErrorMessage)
     {
-        return new Error
+        return new ErrorOmd
         {
             Code = defErrorCode ?? $"{fieldName}{nameof(MustBeInteger)}",
             Name = defErrorMessage ?? $"{caption} მთელი უნდა იყოს"
         };
     }
 
-    public static Error MustBePositive(string fieldName, string? caption, string? defErrorCode, string? defErrorMessage)
+    public static ErrorOmd MustBePositive(string fieldName, string? caption, string? defErrorCode,
+        string? defErrorMessage)
     {
-        return new Error
+        return new ErrorOmd
         {
             Code = defErrorCode ?? $"{fieldName}{nameof(MustBePositive)}",
             Name = defErrorMessage ?? $"{caption} უნდა იყოს დადებითი რიცხვი"
         };
     }
 
-    public static Error Required(string fieldName, string? caption, string? defErrorCode, string? defErrorMessage)
+    public static ErrorOmd Required(string fieldName, string? caption, string? defErrorCode, string? defErrorMessage)
     {
-        return new Error
+        return new ErrorOmd
         {
             Code = defErrorCode ?? $"{fieldName}{nameof(Required)}",
             Name = defErrorMessage ?? $"{caption} შევსებული უნდა იყოს"
         };
     }
 
-    public static Error MustBeBoolean(string fieldName, string? caption, string typeName)
+    public static ErrorOmd MustBeBoolean(string fieldName, string? caption, string typeName)
     {
-        return new Error
+        return new ErrorOmd
         {
             Code = $"{fieldName}{nameof(MustBeBoolean)}", Name = $"{caption} ველი უნდა იყოს {typeName} ტიპის"
         };
     }
 
-    public static Error IsEmpty(string fieldName, string? caption)
+    public static ErrorOmd IsEmpty(string fieldName, string? caption)
     {
-        return new Error { Code = $"{fieldName}{nameof(IsEmpty)}", Name = $"{caption} შევსებული არ არის" };
+        return new ErrorOmd { Code = $"{fieldName}{nameof(IsEmpty)}", Name = $"{caption} შევსებული არ არის" };
     }
 
-    public static Error IsTooLong(string fieldName, string? caption)
+    public static ErrorOmd IsTooLong(string fieldName, string? caption)
     {
-        return new Error { Code = $"{fieldName}{nameof(IsTooLong)}", Name = $"{caption} ძალიან გრძელია" };
+        return new ErrorOmd { Code = $"{fieldName}{nameof(IsTooLong)}", Name = $"{caption} ძალიან გრძელია" };
     }
 }
