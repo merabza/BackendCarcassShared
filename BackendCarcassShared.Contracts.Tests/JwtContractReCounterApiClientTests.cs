@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using Moq.Protected;
 using Newtonsoft.Json;
-using OneOf;
+using SystemTools.SharedKernel;
 using SystemTools.SystemToolsShared.Errors;
 using Xunit;
 
@@ -154,17 +154,15 @@ public sealed class JwtContractReCounterApiClientTests : IDisposable
             ItExpr.IsAny<CancellationToken>()).ReturnsAsync(response);
 
         // Act
-        OneOf<LoginResponse, ErrorOmd[]> result = await client.Login(loginRequest);
+        Result<LoginResponse> result = await client.Login(loginRequest);
 
         // Assert
-        Assert.True(result.IsT0);
-        result.Switch(loginResponse =>
-        {
-            Assert.Equal("testuser", loginResponse.UserName);
-            Assert.Equal("test@example.com", loginResponse.Email);
-            Assert.Equal("jwt-token", loginResponse.Token);
-            Assert.Equal(1, loginResponse.UserId);
-        }, errors => Assert.Fail("Expected LoginResponse but got errors"));
+        Assert.True(result.IsSuccess);
+        LoginResponse loginResponse = result.Value;
+        Assert.Equal("testuser", loginResponse.UserName);
+        Assert.Equal("test@example.com", loginResponse.Email);
+        Assert.Equal("jwt-token", loginResponse.Token);
+        Assert.Equal(1, loginResponse.UserId);
     }
 
     [Fact]
@@ -191,12 +189,11 @@ public sealed class JwtContractReCounterApiClientTests : IDisposable
             ItExpr.IsAny<CancellationToken>()).ReturnsAsync(response);
 
         // Act
-        OneOf<LoginResponse, ErrorOmd[]> result = await client.Login(loginRequest);
+        Result<LoginResponse> result = await client.Login(loginRequest);
 
         // Assert
-        Assert.True(result.IsT1);
-        result.Switch(loginResponse => Assert.Fail("Expected errors but got LoginResponse"),
-            errors => Assert.NotEmpty(errors));
+        Assert.True(result.IsFailure);
+        Assert.NotEqual(Error.None, result.Error);
     }
 
     [Fact]

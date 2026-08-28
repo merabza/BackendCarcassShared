@@ -7,8 +7,8 @@ using BackendCarcassShared.Contracts.V1.Routes;
 using LanguageExt;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using OneOf;
 using SystemTools.ReCounterContracts;
+using SystemTools.SharedKernel;
 using SystemTools.SystemToolsShared.Errors;
 
 namespace BackendCarcassShared.Contracts;
@@ -31,7 +31,7 @@ public /*open*/ class JwtContractReCounterApiClient : ReCounterApiClient
             cancellationToken);
     }
 
-    public Task<OneOf<LoginResponse, ErrorOmd[]>> Login(LoginRequest loginRequest,
+    public Task<Result<LoginResponse>> Login(LoginRequest loginRequest,
         CancellationToken cancellationToken = default)
     {
         return PostAsyncReturn<LoginResponse>(

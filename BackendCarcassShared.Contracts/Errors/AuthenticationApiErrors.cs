@@ -1,43 +1,31 @@
 ﻿using SystemTools.ApiContracts.Errors;
+using SystemTools.SharedKernel;
 using SystemTools.SystemToolsShared.Errors;
 
 namespace BackendCarcassShared.Contracts.Errors;
 
 public static class AuthenticationApiErrors
 {
-    public static readonly ErrorOmd UserAlreadyExists = new()
-    {
-        Code = nameof(UserAlreadyExists), Name = "მომხმარებელი ასეთი სახელით უკვე არსებობს"
-    };
-
-    public static readonly ErrorOmd UsernameOrPasswordIsIncorrect = new()
-    {
-        Code = nameof(UsernameOrPasswordIsIncorrect), Name = "მომხმარებლის სახელი, ან პაროლი არასწორია "
-    };
-
-    public static readonly ErrorOmd EmailAlreadyExists = new()
-    {
-        Code = nameof(EmailAlreadyExists), Name = "მომხმარებელი ასეთი ელექტრონული მისამართით უკვე არსებობს"
-    };
-
-    public static readonly ErrorOmd MoreComplexPasswordIsRequired = new()
-    {
-        Code = nameof(MoreComplexPasswordIsRequired),
-        Name = "პაროლის გამოყენება ვერ მოხერხდა, საჭიროა უფრო რთული პაროლი"
-    };
-
     public static readonly ErrorOmd CouldNotCreateNewUser = new()
     {
         Code = nameof(CouldNotCreateNewUser), Name = "ახალი მომხმარებლის შექმნა ვერ მოხერხდა"
     };
 
-    public static readonly ErrorOmd InvalidUsername =
-        new() { Code = nameof(InvalidUsername), Name = "არასწორი მომხმარებლის სახელი" };
+    public static Error UserAlreadyExists =>
+        Error.Conflict(nameof(UserAlreadyExists), "მომხმარებელი ასეთი სახელით უკვე არსებობს");
 
-    public static readonly ErrorOmd InvalidEmail = new()
-    {
-        Code = nameof(InvalidEmail), Name = "არასწორი ელექტრონული ფოსტის მისამართი"
-    };
+    public static Error EmailAlreadyExists =>
+        Error.Conflict(nameof(EmailAlreadyExists), "მომხმარებელი ასეთი ელექტრონული მისამართით უკვე არსებობს");
+
+    public static Error MoreComplexPasswordIsRequired =>
+        Error.Problem(nameof(MoreComplexPasswordIsRequired),
+            "პაროლის გამოყენება ვერ მოხერხდა, საჭიროა უფრო რთული პაროლი");
+
+    public static Error UsernameOrPasswordIsIncorrect =>
+        Error.Problem(nameof(UsernameOrPasswordIsIncorrect), "მომხმარებლის სახელი, ან პაროლი არასწორია ");
+
+    public static Error InvalidUsername => Error.Problem(nameof(InvalidUsername), "არასწორი მომხმარებლის სახელი");
+    public static Error InvalidEmail => Error.Problem(nameof(InvalidEmail), "არასწორი ელექტრონული ფოსტის მისამართი");
 
     public static string IsEmptyEmailErrMessage => ApiErrors.IsEmptyErrMessage("ელექტრონული ფოსტის მისამართი");
     public static string IsEmptyFirstNameErrMessage => ApiErrors.IsEmptyErrMessage("სახელი");
