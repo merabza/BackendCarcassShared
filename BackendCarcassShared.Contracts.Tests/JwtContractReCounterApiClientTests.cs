@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using BackendCarcassShared.Contracts.V1.Requests;
 using BackendCarcassShared.Contracts.V1.Responses;
 using BackendCarcassShared.Contracts.V1.Routes;
-using LanguageExt;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Moq.Protected;
@@ -74,10 +73,10 @@ public sealed class JwtContractReCounterApiClientTests : IDisposable
             .ReturnsAsync(response);
 
         // Act
-        Option<ErrorOmd[]> result = await client.IsCurrentUserValid(TestToken);
+        Result result = await client.IsCurrentUserValid(TestToken);
 
         // Assert
-        Assert.True(result.IsNone);
+        Assert.True(result.IsSuccess);
     }
 
     [Fact]
@@ -102,11 +101,11 @@ public sealed class JwtContractReCounterApiClientTests : IDisposable
             .ReturnsAsync(response);
 
         // Act
-        Option<ErrorOmd[]> result = await client.IsCurrentUserValid(TestToken);
+        Result result = await client.IsCurrentUserValid(TestToken);
 
         // Assert
-        Assert.True(result.IsSome);
-        ErrorOmd[] errorList = result.Match(errs => errs, () => Array.Empty<ErrorOmd>());
+        Assert.True(result.IsFailure);
+        ErrorOmd[] errorList = result.Error.ToErrorOmdArray();
         Assert.NotEmpty(errorList);
     }
 

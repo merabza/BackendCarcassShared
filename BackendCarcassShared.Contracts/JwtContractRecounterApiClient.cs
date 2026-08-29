@@ -4,12 +4,10 @@ using System.Threading.Tasks;
 using BackendCarcassShared.Contracts.V1.Requests;
 using BackendCarcassShared.Contracts.V1.Responses;
 using BackendCarcassShared.Contracts.V1.Routes;
-using LanguageExt;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using SystemTools.ReCounterContracts;
 using SystemTools.SharedKernel;
-using SystemTools.SystemToolsShared.Errors;
 
 namespace BackendCarcassShared.Contracts;
 
@@ -24,7 +22,7 @@ public /*open*/ class JwtContractReCounterApiClient : ReCounterApiClient
     {
     }
 
-    public Task<Option<ErrorOmd[]>> IsCurrentUserValid(string token, CancellationToken cancellationToken = default)
+    public Task<Result> IsCurrentUserValid(string token, CancellationToken cancellationToken = default)
     {
         return GetWithTokenAsync(token,
             CarcassApiRoutes.UserRights.UserRightsBase + CarcassApiRoutes.UserRights.IsCurrentUserValid,
