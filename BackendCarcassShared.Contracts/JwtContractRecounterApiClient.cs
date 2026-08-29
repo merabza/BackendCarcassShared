@@ -31,8 +31,7 @@ public /*open*/ class JwtContractReCounterApiClient : ReCounterApiClient
             cancellationToken);
     }
 
-    public Task<Result<LoginResponse>> Login(LoginRequest loginRequest,
-        CancellationToken cancellationToken = default)
+    public Task<Result<LoginResponse>> Login(LoginRequest loginRequest, CancellationToken cancellationToken = default)
     {
         return PostAsyncReturn<LoginResponse>(
             CarcassApiRoutes.Authentication.AuthenticationBase + CarcassApiRoutes.Authentication.Login, false,
