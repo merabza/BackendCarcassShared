@@ -2,7 +2,6 @@
 
 public sealed class DataTypesResponse
 {
-    // ReSharper disable once ConvertToPrimaryConstructor
     public DataTypesResponse(string dtTable, string dtName, string dtNameNominative, string dtNameGenitive,
         string? idFieldName, string? keyFieldName, string? nameFieldName)
     {

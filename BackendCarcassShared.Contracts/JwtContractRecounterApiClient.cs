@@ -15,7 +15,6 @@ namespace BackendCarcassShared.Contracts;
 // ReSharper disable once UnusedType.Global
 public /*open*/ class JwtContractReCounterApiClient : ReCounterApiClient
 {
-    // ReSharper disable once ConvertToPrimaryConstructor
     protected JwtContractReCounterApiClient(ILogger logger, IHttpClientFactory httpClientFactory, string server,
         bool useConsole) : base(logger, httpClientFactory, new ReCounterMessageHubClient(server, null), server, null,
         useConsole)
