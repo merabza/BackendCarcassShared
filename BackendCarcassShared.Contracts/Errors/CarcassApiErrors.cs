@@ -1,12 +1,11 @@
 ﻿using SystemTools.ApiContracts.Errors;
 using SystemTools.SharedKernel;
-using SystemTools.SystemToolsShared.Errors;
 
 namespace BackendCarcassShared.Contracts.Errors;
 
 public static class CarcassApiErrors
 {
-    public static readonly ErrorOmd InvalidUser = new() { Code = nameof(InvalidUser), Name = "მომხმარებელი არასწორია" };
+    public static Error InvalidUser => Error.Problem(nameof(InvalidUser), "მომხმარებელი არასწორია");
     //public static readonly ErrorOmd RequestIsEmpty = new()
     //{
     //    Code = nameof(RequestIsEmpty), Name = "ატვირთული ინფორმაცია არასწორია"
@@ -23,11 +22,6 @@ public static class CarcassApiErrors
 
     public static string IsLongerThenErrCode => "{PropertyName}IsLongerThen{MaxLength}";
 
-    public static ErrorOmd IsLongerThen(string propertyNameLocalized, int maxLength)
-    {
-        return new ErrorOmd
-        {
-            Code = IsLongerThenErrCode, Name = ApiErrors.IsLongerThenErrMessage(propertyNameLocalized, maxLength)
-        };
-    }
+    public static Error IsLongerThen(string propertyNameLocalized, int maxLength) =>
+        Error.Problem(IsLongerThenErrCode, ApiErrors.IsLongerThenErrMessage(propertyNameLocalized, maxLength));
 }

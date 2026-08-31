@@ -1,53 +1,39 @@
-﻿using SystemTools.SystemToolsShared.Errors;
+﻿using SystemTools.SharedKernel;
 
 namespace BackendCarcassShared.Contracts.Errors;
 
 public static class CarcassMasterDataErrors
 {
-    public static ErrorOmd MustBeInteger(string fieldName, string? caption, string? defErrorCode,
-        string? defErrorMessage)
+    public static Error MustBeInteger(string fieldName, string? caption, string? defErrorCode, string? defErrorMessage)
     {
-        return new ErrorOmd
-        {
-            Code = defErrorCode ?? $"{fieldName}{nameof(MustBeInteger)}",
-            Name = defErrorMessage ?? $"{caption} მთელი უნდა იყოს"
-        };
+        return Error.Problem(defErrorCode ?? $"{fieldName}{nameof(MustBeInteger)}",
+            defErrorMessage ?? $"{caption} მთელი უნდა იყოს");
     }
 
-    public static ErrorOmd MustBePositive(string fieldName, string? caption, string? defErrorCode,
-        string? defErrorMessage)
+    public static Error MustBePositive(string fieldName, string? caption, string? defErrorCode, string? defErrorMessage)
     {
-        return new ErrorOmd
-        {
-            Code = defErrorCode ?? $"{fieldName}{nameof(MustBePositive)}",
-            Name = defErrorMessage ?? $"{caption} უნდა იყოს დადებითი რიცხვი"
-        };
+        return Error.Problem(defErrorCode ?? $"{fieldName}{nameof(MustBePositive)}",
+            defErrorMessage ?? $"{caption} უნდა იყოს დადებითი რიცხვი");
     }
 
-    public static ErrorOmd Required(string fieldName, string? caption, string? defErrorCode, string? defErrorMessage)
+    public static Error Required(string fieldName, string? caption, string? defErrorCode, string? defErrorMessage)
     {
-        return new ErrorOmd
-        {
-            Code = defErrorCode ?? $"{fieldName}{nameof(Required)}",
-            Name = defErrorMessage ?? $"{caption} შევსებული უნდა იყოს"
-        };
+        return Error.Problem(defErrorCode ?? $"{fieldName}{nameof(Required)}",
+            defErrorMessage ?? $"{caption} შევსებული უნდა იყოს");
     }
 
-    public static ErrorOmd MustBeBoolean(string fieldName, string? caption, string typeName)
+    public static Error MustBeBoolean(string fieldName, string? caption, string typeName)
     {
-        return new ErrorOmd
-        {
-            Code = $"{fieldName}{nameof(MustBeBoolean)}", Name = $"{caption} ველი უნდა იყოს {typeName} ტიპის"
-        };
+        return Error.Problem($"{fieldName}{nameof(MustBeBoolean)}", $"{caption} ველი უნდა იყოს {typeName} ტიპის");
     }
 
-    public static ErrorOmd IsEmpty(string fieldName, string? caption)
+    public static Error IsEmpty(string fieldName, string? caption)
     {
-        return new ErrorOmd { Code = $"{fieldName}{nameof(IsEmpty)}", Name = $"{caption} შევსებული არ არის" };
+        return Error.Problem($"{fieldName}{nameof(IsEmpty)}", $"{caption} შევსებული არ არის");
     }
 
-    public static ErrorOmd IsTooLong(string fieldName, string? caption)
+    public static Error IsTooLong(string fieldName, string? caption)
     {
-        return new ErrorOmd { Code = $"{fieldName}{nameof(IsTooLong)}", Name = $"{caption} ძალიან გრძელია" };
+        return Error.Problem($"{fieldName}{nameof(IsTooLong)}", $"{caption} ძალიან გრძელია");
     }
 }

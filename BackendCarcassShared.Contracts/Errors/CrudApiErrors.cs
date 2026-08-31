@@ -1,38 +1,26 @@
-﻿using SystemTools.SystemToolsShared.Errors;
+﻿using SystemTools.SharedKernel;
 
 namespace BackendCarcassShared.Contracts.Errors;
 
 public static class CrudApiErrors
 {
-    public static readonly ErrorOmd WeCouldNotFindARecordToEditInTheDatabase = new()
-    {
-        Code = nameof(WeCouldNotFindARecordToEditInTheDatabase),
-        Name = "ბაზაში ვერ ვიპოვეთ დასარედაქტირებელი ჩანაწერი"
-    };
+    public static Error CouldNotCreateNewRecord =>
+        Error.Problem(nameof(CouldNotCreateNewRecord), "ახალი ჩანაწერის შექმნა ვერ მოხერხდა");
 
-    public static readonly ErrorOmd CouldNotCreateNewRecord = new()
-    {
-        Code = nameof(CouldNotCreateNewRecord), Name = "ახალი ჩანაწერის შექმნა ვერ მოხერხდა"
-    };
+    public static Error NoRecordToDeleteFound =>
+        Error.Problem(nameof(NoRecordToDeleteFound), "წასაშლელი ჩანაწერი ვერ მოიძებნა. წაშლა ვერ მოხერხდა");
 
-    public static readonly ErrorOmd NoRecordToDeleteFound = new()
-    {
-        Code = nameof(NoRecordToDeleteFound), Name = "წასაშლელი ჩანაწერი ვერ მოიძებნა. წაშლა ვერ მოხერხდა"
-    };
+    public static Error VirtualMethodDoesNotImplemented =>
+        Error.Problem(nameof(VirtualMethodDoesNotImplemented),
+            "იდენტიფიკატორის მიხედვით ინფორმაციის ჩატვირთვის მეთოდი არ არის იმპლემენტირებული");
 
-    public static readonly ErrorOmd VirtualMethodDoesNotImplemented = new()
-    {
-        Code = nameof(VirtualMethodDoesNotImplemented),
-        Name = "იდენტიფიკატორის მიხედვით ინფორმაციის ჩატვირთვის მეთოდი არ არის იმპლემენტირებული"
-    };
+    public static Error UploadedInformationCouldNotBeDecrypted =>
+        Error.Problem(nameof(UploadedInformationCouldNotBeDecrypted), "ატვირთული ინფორმაციის გაშიფვრა ვერ მოხერხდა");
 
-    public static readonly ErrorOmd UploadedInformationCouldNotBeDecrypted = new()
-    {
-        Code = nameof(UploadedInformationCouldNotBeDecrypted), Name = "ატვირთული ინფორმაციის გაშიფვრა ვერ მოხერხდა"
-    };
+    public static Error WrongIdentifier =>
+        Error.Problem(nameof(WrongIdentifier), "ატვირთული ინფორმაცია არასწორია. (არასწორი იდენტიფიკატორი.)");
 
-    public static readonly ErrorOmd WrongIdentifier = new()
-    {
-        Code = nameof(WrongIdentifier), Name = "ატვირთული ინფორმაცია არასწორია. (არასწორი იდენტიფიკატორი.)"
-    };
+    public static Error WeCouldNotFindARecordToEditInTheDatabase =>
+        Error.Problem(nameof(WeCouldNotFindARecordToEditInTheDatabase),
+            "ბაზაში ვერ ვიპოვეთ დასარედაქტირებელი ჩანაწერი");
 }

@@ -1,40 +1,27 @@
-﻿using SystemTools.SystemToolsShared.Errors;
+﻿using SystemTools.SharedKernel;
 
 namespace BackendCarcassShared.Contracts.Errors;
 
 // ReSharper disable once ClassNeverInstantiated.Global
 public static class RightsApiErrors
 {
-    public static readonly ErrorOmd NoSufficientRights = new()
-    {
-        Code = nameof(NoSufficientRights), Name = "თქვენ არ გაქვთ საკმარისი უფლებები"
-    };
+    public static Error NoSufficientRights =>
+        Error.Problem(nameof(NoSufficientRights), "თქვენ არ გაქვთ საკმარისი უფლებები");
 
-    public static readonly ErrorOmd ErrorWhenDeterminingCrudType = new()
-    {
-        Code = nameof(ErrorWhenDeterminingCrudType), Name = "შეცდომა ბაზაში ცვლილების მეთოდის დადგენისას"
-    };
+    public static Error ErrorWhenDeterminingCrudType =>
+        Error.Problem(nameof(ErrorWhenDeterminingCrudType), "შეცდომა ბაზაში ცვლილების მეთოდის დადგენისას");
 
-    public static readonly ErrorOmd ErrorWhenDeterminingRights = new()
-    {
-        Code = nameof(ErrorWhenDeterminingRights), Name = "შეცდომა უფლებების დადგენისას"
-    };
+    public static Error TableNamesListNotIdentified =>
+        Error.Problem(nameof(TableNamesListNotIdentified), "ცხრილის სახელების სიის იდენტიფიცირება ვერ მოხერხდა");
 
-    public static readonly ErrorOmd UserNotIdentified = new()
-    {
-        Code = nameof(UserNotIdentified), Name = "მომხმარებლის იდენტიფიცირება ვერ მოხერხდა"
-    };
+    public static Error ErrorWhenDeterminingRights =>
+        Error.Problem(nameof(ErrorWhenDeterminingRights), "შეცდომა უფლებების დადგენისას");
 
-    public static readonly ErrorOmd TableNameNotIdentified = new()
-    {
-        Code = nameof(TableNameNotIdentified), Name = "ცხრილის სახელის იდენტიფიცირება ვერ მოხერხდა"
-    };
+    public static Error UserNotIdentified =>
+        Error.Problem(nameof(UserNotIdentified), "მომხმარებლის იდენტიფიცირება ვერ მოხერხდა");
 
-    public static readonly ErrorOmd TableNamesListNotIdentified = new()
-    {
-        Code = nameof(TableNamesListNotIdentified), Name = "ცხრილის სახელების სიის იდენტიფიცირება ვერ მოხერხდა"
-    };
+    public static Error TableNameNotIdentified =>
+        Error.Problem(nameof(TableNameNotIdentified), "ცხრილის სახელის იდენტიფიცირება ვერ მოხერხდა");
 
-    public static readonly ErrorOmd InsufficientRights =
-        new() { Code = nameof(InsufficientRights), Name = "არასაკმარისი უფლებები" };
+    public static Error InsufficientRights => Error.Problem(nameof(InsufficientRights), "არასაკმარისი უფლებები");
 }

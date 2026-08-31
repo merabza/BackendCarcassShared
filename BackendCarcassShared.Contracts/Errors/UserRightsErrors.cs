@@ -1,14 +1,11 @@
 ﻿using SystemTools.SharedKernel;
-using SystemTools.SystemToolsShared.Errors;
 
 namespace BackendCarcassShared.Contracts.Errors;
 
 public static class UserRightsErrors
 {
-    public static readonly ErrorOmd CouldNotLoadMenu = new()
-    {
-        Code = nameof(CouldNotLoadMenu), Name = "მენიუს ჩატვირთვა ვერ მოხერხდა"
-    };
+    public static Error CouldNotLoadMenu => Error.Problem(nameof(CouldNotLoadMenu), "მენიუს ჩატვირთვა ვერ მოხერხდა");
+
     //public static readonly ErrorOmd BadRequestFailedToDeleteUser = new()
     //{
     //    Code = nameof(BadRequestFailedToDeleteUser), Name = "არასწორი მოთხოვნა, მომხმარებლის წაშლა ვერ მოხერხდა"

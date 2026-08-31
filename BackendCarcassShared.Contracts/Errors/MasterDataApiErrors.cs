@@ -1,148 +1,108 @@
-﻿using SystemTools.SystemToolsShared.Errors;
+﻿using SystemTools.SharedKernel;
 
 namespace BackendCarcassShared.Contracts.Errors;
 
 public static class MasterDataApiErrors
 {
-    public static ErrorOmd NoRightsForCreate =>
-        new() { Code = nameof(NoRightsForCreate), Name = "თქვენ არ გაქვთ უფლება შექმნათ ჩანაწერი ამ ცხრილში" };
+    public static Error NoRightsForCreate =>
+        Error.Problem(nameof(NoRightsForCreate), "თქვენ არ გაქვთ უფლება შექმნათ ჩანაწერი ამ ცხრილში");
 
-    public static ErrorOmd NoRightsForUpdate =>
-        new() { Code = nameof(NoRightsForUpdate), Name = "თქვენ არ გაქვთ უფლება შეცვალოთ ჩანაწერი ამ ცხრილში" };
+    public static Error NoRightsForUpdate =>
+        Error.Problem(nameof(NoRightsForUpdate), "თქვენ არ გაქვთ უფლება შეცვალოთ ჩანაწერი ამ ცხრილში");
 
-    public static ErrorOmd NoRightsForDelete =>
-        new() { Code = nameof(NoRightsForDelete), Name = "თქვენ არ გაქვთ უფლება წაშალოთ ჩანაწერი ამ ცხრილში" };
+    public static Error NoRightsForDelete =>
+        Error.Problem(nameof(NoRightsForDelete), "თქვენ არ გაქვთ უფლება წაშალოთ ჩანაწერი ამ ცხრილში");
 
-    public static ErrorOmd CannotCreateNewRecord =>
-        new() { Code = nameof(CannotCreateNewRecord), Name = "ახალი ჩანაწერის შექმნა ვერ მოხერხდა" };
+    public static Error CannotCreateNewRecord =>
+        Error.Problem(nameof(CannotCreateNewRecord), "ახალი ჩანაწერის შექმნა ვერ მოხერხდა");
 
-    public static ErrorOmd CannotLoad =>
-        new() { Code = nameof(CannotLoad), Name = "მონაცემთა ბაზიდან ინფორმაციის ჩატვირთვა ვერ მოხერხდა" };
+    public static Error CannotLoad =>
+        Error.Problem(nameof(CannotLoad), "მონაცემთა ბაზიდან ინფორმაციის ჩატვირთვა ვერ მოხერხდა");
 
-    public static ErrorOmd CannotFindUser =>
-        new() { Code = nameof(CannotFindUser), Name = "მომხმარებელი ვერ მოიძებნა" };
+    public static Error CannotFindUser => Error.Problem(nameof(CannotFindUser), "მომხმარებელი ვერ მოიძებნა");
 
-    public static ErrorOmd CannotFindRole => new() { Code = nameof(CannotFindRole), Name = "როლი ვერ მოიძებნა" };
+    public static Error CannotFindRole => Error.Problem(nameof(CannotFindRole), "როლი ვერ მოიძებნა");
 
-    public static ErrorOmd CannotUpdateNewRecord =>
-        new() { Code = nameof(CannotUpdateNewRecord), Name = "ჩანაწერის შეცვლა ვერ მოხერხდა" };
+    public static Error CannotUpdateNewRecord =>
+        Error.Problem(nameof(CannotUpdateNewRecord), "ჩანაწერის შეცვლა ვერ მოხერხდა");
 
-    public static ErrorOmd CannotDeleteNewRecord =>
-        new() { Code = nameof(CannotDeleteNewRecord), Name = "ჩანაწერის წაშლა ვერ მოხერხდა" };
+    public static Error CannotDeleteNewRecord =>
+        Error.Problem(nameof(CannotDeleteNewRecord), "ჩანაწერის წაშლა ვერ მოხერხდა");
 
-    public static ErrorOmd EntryNotFound()
+    public static Error EntryNotFound()
     {
-        return new ErrorOmd { Code = nameof(EntryNotFound), Name = "ჩანაწერის პოვნა ვერ მოხერხდა" };
+        return Error.Problem(nameof(EntryNotFound), "ჩანაწერის პოვნა ვერ მოხერხდა");
     }
 
-    public static ErrorOmd TableNotFound(string tableName)
+    public static Error TableNotFound(string tableName)
     {
-        var err = new ErrorOmd
-        {
-            Code = $"{tableName}{nameof(TableNotFound)}", Name = $"ცხრილი სახელით {tableName} არ არსებობს"
-        };
-        return err;
+        return Error.Problem($"{tableName}{nameof(TableNotFound)}", $"ცხრილი სახელით {tableName} არ არსებობს");
     }
 
-    public static ErrorOmd TableHaveNotSingleKey(string tableName)
+    public static Error TableHaveNotSingleKey(string tableName)
     {
-        var err = new ErrorOmd
-        {
-            Code = $"{tableName}{nameof(TableHaveNotSingleKey)}",
-            Name = $"ცხრილს სახელით {tableName} არ აქვს ერთადერთი გასაღები"
-        };
-        return err;
+        return Error.Problem($"{tableName}{nameof(TableHaveNotSingleKey)}",
+            $"ცხრილს სახელით {tableName} არ აქვს ერთადერთი გასაღები");
     }
 
-    public static ErrorOmd TableSingleKeyMustHaveOneProperty(string tableName)
+    public static Error TableSingleKeyMustHaveOneProperty(string tableName)
     {
-        var err = new ErrorOmd
-        {
-            Code = $"{tableName}{nameof(TableSingleKeyMustHaveOneProperty)}",
-            Name = $"ცხრილს სახელით {tableName} ერთადერთ გასაღებში არ აქვს ზუსტად ერთი ველი"
-        };
-        return err;
+        return Error.Problem($"{tableName}{nameof(TableSingleKeyMustHaveOneProperty)}",
+            $"ცხრილს სახელით {tableName} ერთადერთ გასაღებში არ აქვს ზუსტად ერთი ველი");
     }
 
-    public static ErrorOmd SetMethodNotFoundForTable(string tableName)
+    public static Error SetMethodNotFoundForTable(string tableName)
     {
-        return new ErrorOmd
-        {
-            Code = $"{nameof(SetMethodNotFoundForTable)}{tableName}",
-            Name = $"ცხრილს სახელით {tableName} არ აქვს მეთოდი Set"
-        };
+        return Error.Problem($"{nameof(SetMethodNotFoundForTable)}{tableName}",
+            $"ცხრილს სახელით {tableName} არ აქვს მეთოდი Set");
     }
 
-    public static ErrorOmd SetMethodReturnsNullForTable(string tableName)
+    public static Error SetMethodReturnsNullForTable(string tableName)
     {
-        return new ErrorOmd
-        {
-            Code = $"{nameof(SetMethodReturnsNullForTable)}{tableName}",
-            Name = $"{tableName} ცხრილის Set მეთოდი აბრუნებს null-ს"
-        };
+        return Error.Problem($"{nameof(SetMethodReturnsNullForTable)}{tableName}",
+            $"{tableName} ცხრილის Set მეთოდი აბრუნებს null-ს");
     }
 
-    public static ErrorOmd RecordDoesNotDeserialized(string tableName)
+    public static Error RecordDoesNotDeserialized(string tableName)
     {
-        return new ErrorOmd
-        {
-            Code = $"{tableName}{nameof(RecordDoesNotDeserialized)}",
-            Name = $"მიღებული ჩანაწერის  გაშიფვრა ვერ მოხერხდა {tableName} ცხრილის სტრუქტურის მიხედვით"
-        };
+        return Error.Problem($"{nameof(RecordDoesNotDeserialized)}{tableName}",
+            $"მიღებული ჩანაწერის  გაშიფვრა ვერ მოხერხდა {tableName} ცხრილის სტრუქტურის მიხედვით");
     }
 
-    public static ErrorOmd WrongId(string tableName)
+    public static Error WrongId(string tableName)
     {
-        return new ErrorOmd
-        {
-            Code = $"{tableName}{nameof(WrongId)}",
-            Name =
-                $"{tableName} ცხრილისთვის მოწოდებული ინფორმაცია არასწორია, რადგან იდენტიფიკატორი არ ემთხვევა მოწოდებული ობიექტის იდენტიფიკატორს"
-        };
+        return Error.Problem($"{tableName}{nameof(WrongId)}",
+            $"{tableName} ცხრილისთვის მოწოდებული ინფორმაცია არასწორია, რადგან იდენტიფიკატორი არ ემთხვევა მოწოდებული ობიექტის იდენტიფიკატორს");
     }
 
-    public static ErrorOmd LoaderForTableNotFound(string tableName)
+    public static Error LoaderForTableNotFound(string tableName)
     {
-        return new ErrorOmd
-        {
-            Code = "LoaderForTableNotFound", Name = $"ჩამტვირთავი ცხრილისთვის სახელით {tableName} ვერ მოიძებნა"
-        };
+        return Error.Problem(nameof(LoaderForTableNotFound),
+            $"ჩამტვირთავი ცხრილისთვის სახელით {tableName} ვერ მოიძებნა");
     }
 
-    public static ErrorOmd RecordNotFound(string tableName, int id)
+    public static Error RecordNotFound(string tableName, int id)
     {
-        return new ErrorOmd
-        {
-            Code = $"{nameof(RecordNotFound)}{tableName}{id}",
-            Name = $"ბაზაში {tableName} ცხრილში {id} იდენტიფიკატორის შესაბამისი ჩანაწერი არ არის ნაპოვნი"
-        };
+        return Error.Problem($"{nameof(RecordNotFound)}{tableName}{id}",
+            $"ბაზაში {tableName} ცხრილში {id} იდენტიფიკატორის შესაბამისი ჩანაწერი არ არის ნაპოვნი");
     }
 
     ////ბაზაში ვერ ვიპოვეთ მოწოდებული იდენტიფიკატორის შესაბამისი ჩანაწერი.
 
-    public static ErrorOmd MasterDataTableNotFound(string tableName)
+    public static Error MasterDataTableNotFound(string tableName)
     {
-        return new ErrorOmd
-        {
-            Code = nameof(MasterDataTableNotFound), Name = $"მონაცემთა ტიპი {tableName} ვერ მოიძებნა"
-        };
+        return Error.Problem(nameof(MasterDataTableNotFound), $"მონაცემთა ტიპი {tableName} ვერ მოიძებნა");
     }
 
-    public static ErrorOmd MasterDataInvalidValidationRules(string tableName)
+    public static Error MasterDataInvalidValidationRules(string tableName)
     {
-        return new ErrorOmd
-        {
-            Code = nameof(MasterDataTableNotFound),
-            Name = $"მონაცემთა ტიპი {tableName} შეიცავს ვალიდაციის არასწორ წესებს"
-        };
+        return Error.Problem(nameof(MasterDataInvalidValidationRules),
+            $"მონაცემთა ტიპი {tableName} შეიცავს ვალიდაციის არასწორ წესებს");
     }
 
-    public static ErrorOmd MasterDataFieldNotFound(string tableName, string fieldName)
+    public static Error MasterDataFieldNotFound(string tableName, string fieldName)
     {
-        return new ErrorOmd
-        {
-            Code = nameof(MasterDataFieldNotFound),
-            Name = $"მონაცემთა ტიპის {tableName} ველი {fieldName} შემოწმებისას ვერ მოიძებნა"
-        };
+        return Error.Problem(nameof(MasterDataFieldNotFound),
+            $"მონაცემთა ტიპის {tableName} ველი {fieldName} შემოწმებისას ვერ მოიძებნა");
     }
 }

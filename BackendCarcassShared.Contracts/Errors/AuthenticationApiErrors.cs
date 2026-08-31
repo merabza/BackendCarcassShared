@@ -1,15 +1,12 @@
 ﻿using SystemTools.ApiContracts.Errors;
 using SystemTools.SharedKernel;
-using SystemTools.SystemToolsShared.Errors;
 
 namespace BackendCarcassShared.Contracts.Errors;
 
 public static class AuthenticationApiErrors
 {
-    public static readonly ErrorOmd CouldNotCreateNewUser = new()
-    {
-        Code = nameof(CouldNotCreateNewUser), Name = "ახალი მომხმარებლის შექმნა ვერ მოხერხდა"
-    };
+    public static Error CouldNotCreateNewUser =>
+        Error.Problem(nameof(CouldNotCreateNewUser), "ახალი მომხმარებლის შექმნა ვერ მოხერხდა");
 
     public static Error UserAlreadyExists =>
         Error.Conflict(nameof(UserAlreadyExists), "მომხმარებელი ასეთი სახელით უკვე არსებობს");
@@ -41,8 +38,6 @@ public static class AuthenticationApiErrors
     public static string PasswordsDoNotMatchErrCode => "PasswordsDoNotMatch";
     public static string PasswordsDoNotMatchErrMessage => "პაროლები ერთმანეთს არ ემთხვევა";
 
-    public static ErrorOmd UserNameIsLongerThenErr(int maxLength)
-    {
-        return CarcassApiErrors.IsLongerThen("მომხმარებლის სახელის", maxLength);
-    }
+    public static Error UserNameIsLongerThenErr(int maxLength) =>
+        CarcassApiErrors.IsLongerThen("მომხმარებლის სახელის", maxLength);
 }
