@@ -7,10 +7,9 @@
     <Folder Name="/SystemTools/">
         <Project Path="../SystemTools/SystemTools.ApiContracts/SystemTools.ApiContracts.csproj" />
         <Project Path="../SystemTools/SystemTools.ReCounterContracts/SystemTools.ReCounterContracts.csproj" />
+        <Project Path="../SystemTools/SystemTools.SharedKernel/SystemTools.SharedKernel.csproj" />
         <Project Path="../SystemTools/SystemTools.SystemToolsShared/SystemTools.SystemToolsShared.csproj" />
     </Folder>
-    <Folder Name="/Tests/">
-        <Project Path="BackendCarcassShared.Contracts.Tests/BackendCarcassShared.Contracts.Tests.csproj" />
-    </Folder>
+    <Folder Name="/Tests/" />
     <Project Path="BackendCarcassShared.Contracts/BackendCarcassShared.Contracts.csproj" />
 </Solution>
