@@ -6,14 +6,14 @@ namespace BackendCarcassShared.Contracts.Errors;
 public static class CarcassApiErrors
 {
     public static Error InvalidUser => Error.Problem(nameof(InvalidUser), "მომხმარებელი არასწორია");
-    //public static readonly ErrorOmd RequestIsEmpty = new()
+    //public static readonly Error RequestIsEmpty = new()
     //{
     //    Code = nameof(RequestIsEmpty), Name = "ატვირთული ინფორმაცია არასწორია"
     //};
 
     public static Error RequestIsEmpty => Error.Failure(nameof(RequestIsEmpty), "ატვირთული ინფორმაცია არასწორია");
 
-    //public static readonly ErrorOmd ParametersAreInvalid =
+    //public static readonly Error ParametersAreInvalid =
     //    new() { Code = nameof(ParametersAreInvalid), Name = "პარამეტრები არასწორია" };
 
     public static Error ParametersAreInvalid => Error.Problem(nameof(ParametersAreInvalid), "პარამეტრები არასწორია");

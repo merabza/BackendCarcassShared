@@ -33,6 +33,6 @@ public static class MasterDataCrudErrors
 }
 
 /*
-            return new ErrorOmd[]
+            return new Error[]
        { new() { Code = "ISortIdHelperIsNull", Name = "ISortIdHelper Is Null" } };
  */
