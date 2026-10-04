@@ -28,11 +28,12 @@ public /*open*/ class JwtContractReCounterApiClient : ReCounterApiClient
             cancellationToken);
     }
 
+    //ტანში პაროლია, ამიტომ შეცდომის პასუხისას (მაგალითად, არასწორი პაროლისას) ტანი კონსოლზე არ იბეჭდება
     public Task<Result<LoginResponse>> Login(LoginRequest loginRequest, CancellationToken cancellationToken = default)
     {
         return PostAsyncReturn<LoginResponse>(
             CarcassApiRoutes.Authentication.AuthenticationBase + CarcassApiRoutes.Authentication.Login, false,
-            JsonConvert.SerializeObject(loginRequest), cancellationToken);
+            JsonConvert.SerializeObject(loginRequest), bodyContainsSecrets: true, cancellationToken);
     }
 
     public void SetToken(string accessToken)

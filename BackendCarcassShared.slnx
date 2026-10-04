@@ -10,6 +10,8 @@
         <Project Path="../SystemTools/SystemTools.SharedKernel/SystemTools.SharedKernel.csproj" />
         <Project Path="../SystemTools/SystemTools.SystemToolsShared/SystemTools.SystemToolsShared.csproj" />
     </Folder>
-    <Folder Name="/Tests/" />
+    <Folder Name="/Tests/">
+        <Project Path="BackendCarcassShared.Contracts.Tests/BackendCarcassShared.Contracts.Tests.csproj" />
+    </Folder>
     <Project Path="BackendCarcassShared.Contracts/BackendCarcassShared.Contracts.csproj" />
 </Solution>
