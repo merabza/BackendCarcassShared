@@ -33,7 +33,7 @@ public /*open*/ class JwtContractReCounterApiClient : ReCounterApiClient
     {
         return PostAsyncReturn<LoginResponse>(
             CarcassApiRoutes.Authentication.AuthenticationBase + CarcassApiRoutes.Authentication.Login, false,
-            JsonConvert.SerializeObject(loginRequest), bodyContainsSecrets: true, cancellationToken);
+            JsonConvert.SerializeObject(loginRequest), true, cancellationToken);
     }
 
     public void SetToken(string accessToken)
