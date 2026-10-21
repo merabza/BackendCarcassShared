@@ -8,10 +8,10 @@
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.11.0" />
     <PackageVersion Include="Moq" Version="4.21.0" />
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.35.0.4138" />
-    <PackageVersion Include="SystemTools.ApiContracts" Version="1.0.9790.32369" />
-    <PackageVersion Include="SystemTools.ReCounterContracts" Version="1.0.9790.32369" />
-    <PackageVersion Include="SystemTools.SharedKernel" Version="1.0.9790.32369" />
-    <PackageVersion Include="SystemTools.SystemToolsShared" Version="1.0.9790.32369" />
+    <PackageVersion Include="SystemTools.ApiContracts" Version="1.0.9790.33334" />
+    <PackageVersion Include="SystemTools.ReCounterContracts" Version="1.0.9790.33334" />
+    <PackageVersion Include="SystemTools.SharedKernel" Version="1.0.9790.33334" />
+    <PackageVersion Include="SystemTools.SystemToolsShared" Version="1.0.9790.33334" />
     <PackageVersion Include="xunit" Version="2.9.3" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="4.0.1" />
   </ItemGroup>
