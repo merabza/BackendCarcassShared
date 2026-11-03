@@ -15,6 +15,30 @@ public static class CarcassApiRoutes
 
         // POST api/v1/authentication/login
         public const string Login = "/login";
+
+        // POST api/v1/authentication/confirmemail
+        public const string ConfirmEmail = "/confirmemail";
+
+        // POST api/v1/authentication/confirmemaillink
+        public const string ConfirmEmailLink = "/confirmemaillink";
+
+        // POST api/v1/authentication/resendcode
+        public const string ResendCode = "/resendcode";
+
+        // POST api/v1/authentication/changerequiredpassword
+        public const string ChangeRequiredPassword = "/changerequiredpassword";
+
+        // POST api/v1/authentication/refresh
+        public const string Refresh = "/refresh";
+
+        // POST api/v1/authentication/logout
+        public const string Logout = "/logout";
+
+        // POST api/v1/authentication/forgotpassword
+        public const string ForgotPassword = "/forgotpassword";
+
+        // POST api/v1/authentication/resetpassword
+        public const string ResetPassword = "/resetpassword";
     }
 
     public static class DataTypes

@@ -48,4 +48,10 @@ public sealed class LoginResponse
     public string? LastName { get; set; }
     public string? RoleName { get; set; }
     public List<string> AppClaims { get; set; } = [];
+
+    //რა უნდა გააკეთოს მომხმარებელმა სრული წვდომის მისაღებად. None ნიშნავს, რომ Token სრული წვდომის ტოკენია
+    public ELoginNextStep NextStep { get; set; }
+
+    //წვდომის ტოკენის განახლების ტოკენი. ივსება მხოლოდ მაშინ, როცა NextStep არის None
+    public string? RefreshToken { get; set; }
 }
