@@ -1,6 +1,7 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using BackendCarcassShared.Contracts.Errors;
 using BackendCarcassShared.Contracts.V1.Requests;
 using BackendCarcassShared.Contracts.V1.Responses;
 using BackendCarcassShared.Contracts.V1.Routes;
@@ -15,10 +16,39 @@ namespace BackendCarcassShared.Contracts;
 // ReSharper disable once UnusedType.Global
 public /*open*/ class JwtContractReCounterApiClient : ReCounterApiClient
 {
+    private readonly ClientCredentialsTokenProvider? _tokenProvider;
+
     protected JwtContractReCounterApiClient(ILogger logger, IHttpClientFactory httpClientFactory, string server,
         bool useConsole) : base(logger, httpClientFactory, new ReCounterMessageHubClient(server, null), server, null,
         useConsole)
     {
+    }
+
+    //SSO რეჟიმი: კლიენტი sso.ltg.ge-ზე client_credentials-ით შედის, მომხმარებლის სახელისა და პაროლის გარეშე
+    protected JwtContractReCounterApiClient(ILogger logger, IHttpClientFactory httpClientFactory, string server,
+        bool useConsole, ClientCredentialsTokenProvider tokenProvider) : this(logger, httpClientFactory, server,
+        useConsole)
+    {
+        _tokenProvider = tokenProvider;
+    }
+
+    //client_credentials-ის ტოკენის მიღება (ან ქეშიდან აღება) და მისი გამოყენება შემდეგ მოთხოვნებში.
+    //ტოკენის ვადა მოკლეა, ამიტომ ეს ყოველი სამუშაოს დაწყებამდე გამოიძახება
+    public async Task<Result> AuthenticateWithClientCredentials(CancellationToken cancellationToken = default)
+    {
+        if (_tokenProvider is null)
+        {
+            return Result.Failure(SsoErrors.TokenRequestFailed);
+        }
+
+        Result<string> token = await _tokenProvider.GetAccessTokenAsync(cancellationToken);
+        if (token.IsFailure)
+        {
+            return Result.Failure(token.Error);
+        }
+
+        SetToken(token.Value);
+        return Result.Success();
     }
 
     public Task<Result> IsCurrentUserValid(string token, CancellationToken cancellationToken = default)

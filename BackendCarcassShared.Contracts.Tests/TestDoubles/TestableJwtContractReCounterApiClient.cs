@@ -14,6 +14,11 @@ internal sealed class TestableJwtContractReCounterApiClient : JwtContractReCount
     {
     }
 
+    public TestableJwtContractReCounterApiClient(ILogger logger, IHttpClientFactory httpClientFactory, string server,
+        ClientCredentialsTokenProvider tokenProvider) : base(logger, httpClientFactory, server, false, tokenProvider)
+    {
+    }
+
     //მოთხოვნა, რომელიც შეტყობინებების hub-საც უშვებს, როგორც მემკვიდრე კლიენტების (მაგალითად, AppGrammarGeApiClient)
     //პროცესების გამშვები მეთოდები
     public ValueTask<Result> PostWithMessageHub(string afterServerAddress,

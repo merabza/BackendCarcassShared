@@ -23,10 +23,12 @@ internal sealed class StubHttpMessageHandler : HttpMessageHandler
     public HttpMethod? LastRequestMethod { get; private set; }
     public string? LastRequestBody { get; private set; }
     public string? LastRequestAuthorization { get; private set; }
+    public int RequestCount { get; private set; }
 
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
         CancellationToken cancellationToken)
     {
+        RequestCount++;
         LastRequestUri = request.RequestUri;
         LastRequestMethod = request.Method;
         LastRequestAuthorization = request.Headers.Authorization?.ToString();
