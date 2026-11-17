@@ -1,4 +1,3 @@
-using SystemTools.ApiContracts.Errors;
 using SystemTools.SharedKernel;
 
 namespace BackendCarcassShared.Contracts.Errors;

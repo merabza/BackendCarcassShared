@@ -25,8 +25,8 @@ public sealed class ClientCredentialsTokenProvider : IDisposable
     private readonly string _clientId;
     private readonly string _clientSecret;
     private readonly IHttpClientFactory _httpClientFactory;
-    private readonly ILogger _logger;
     private readonly SemaphoreSlim _lock = new(1, 1);
+    private readonly ILogger _logger;
     private readonly string _scope;
     private readonly TimeProvider _timeProvider;
     private readonly Uri _tokenEndpoint;
@@ -95,7 +95,7 @@ public sealed class ClientCredentialsTokenProvider : IDisposable
                 return Result.Failure<string>(SsoErrors.TokenRequestFailed);
             }
 
-            TokenResponse? token = await JsonSerializer.DeserializeAsync<TokenResponse>(
+            var token = await JsonSerializer.DeserializeAsync<TokenResponse>(
                 await response.Content.ReadAsStreamAsync(cancellationToken), cancellationToken: cancellationToken);
             if (string.IsNullOrWhiteSpace(token?.AccessToken))
             {
